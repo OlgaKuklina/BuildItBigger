@@ -24,14 +24,25 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.OnFr
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+
+    }
+    public void launchLibraryActivity(View view) {
+        final Context context = this;
+        (new EndpointsAsyncTask(
+                new EndpointsAsyncTask.AsyncResponse(){
+
+                    @Override
+                    public void processFinish(String output){
+                        //Here you will receive the result fired from async class
+                        //of onPostExecute(result) method.
+                        Intent myIntent = new Intent(context, JokesActivity.class);
+                        myIntent.putExtra("hilarious guitar joke", output);
+                        startActivity(myIntent);
+                    }
+                }
+        )).execute(new Pair<Context, String>(this, "Manfred"));
     }
 
-
-    public void launchLibraryActivity(View view){
-        Intent myIntent = new Intent(this, JokesActivity.class);
-        startActivity(myIntent);
-    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
