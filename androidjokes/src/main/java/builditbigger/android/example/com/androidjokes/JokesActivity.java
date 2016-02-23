@@ -20,11 +20,4 @@ public class JokesActivity extends AppCompatActivity {
 
     }
 
-    public void launchLibraryActivity(View view){
-        Intent myIntent = new Intent(this, JokesActivity.class);
-        startActivity(myIntent);
-
-
-    }
-
 }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.android.builditbigger.FragmentMain">
+    tools:context="com.example.android.builditbigger.paid.FragmentMain">
 
     <TextView
         android:id="@+id/todo_text_view"
@@ -19,9 +19,8 @@
         android:layout_marginTop="@dimen/controls_margin"
         android:text="@string/button_text"
         android:layout_below="@+id/todo_text_view"
-        android:onClick="launchLibraryActivity"
+        android:onClick="launchLibraryActivityWithAds"
         />
-
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_marginTop="@dimen/fab_margin"
@@ -29,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true" />
+
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -43,3 +43,4 @@
 
 
 </FrameLayout>
+

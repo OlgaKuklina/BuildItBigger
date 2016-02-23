@@ -40,6 +40,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    androidTestCompile 'junit:junit:4.12'
     compile project(':androidjokes')
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:23.1.1'
@@ -47,3 +48,34 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:design:23.1.1'
 }
+
+task runAppEngineAndTest {
+    dependsOn=
+            ["runAppEngine", "runConnectedAndroidTest", "stopAppEngine"]
+}
+
+task runAppEngine(dependsOn: ":backend:appengineRun") {
+    project(":backend").afterEvaluate { backend ->
+        backend.extensions.appengine.daemon = true
+    }
+    doLast {
+        println "runAppEngine is runned!"
+
+    }
+}
+
+task runConnectedAndroidTest(dependsOn: ":app:connectedAndroidTest") {
+    mustRunAfter runAppEngine
+    doLast {
+        println "connectedAndroidTest is finished"
+    }
+}
+
+task stopAppEngine(dependsOn: ":backend:appengineStop") {
+    mustRunAfter runConnectedAndroidTest
+    doLast {
+        println "appengineStop is finished"
+    }
+}
+
+
