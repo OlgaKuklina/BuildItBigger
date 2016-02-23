@@ -49,33 +49,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
 }
 
-task runAppEngineAndTest {
-    dependsOn=
-            ["runAppEngine", "runConnectedAndroidTest", "stopAppEngine"]
-}
-
-task runAppEngine(dependsOn: ":backend:appengineRun") {
-    project(":backend").afterEvaluate { backend ->
-        backend.extensions.appengine.daemon = true
-    }
-    doLast {
-        println "runAppEngine is runned!"
-
-    }
-}
-
-task runConnectedAndroidTest(dependsOn: ":app:connectedAndroidTest") {
-    mustRunAfter runAppEngine
-    doLast {
-        println "connectedAndroidTest is finished"
-    }
-}
-
-task stopAppEngine(dependsOn: ":backend:appengineStop") {
-    mustRunAfter runConnectedAndroidTest
-    doLast {
-        println "appengineStop is finished"
-    }
-}
 
 
