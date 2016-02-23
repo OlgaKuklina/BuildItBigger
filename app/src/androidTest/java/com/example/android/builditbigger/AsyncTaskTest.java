@@ -6,6 +6,8 @@ import android.util.Pair;
 /**
  * Created by olgakuklina on 2016-02-21.
  */
+import com.example.android.builditbigger.EndpointsAsyncTask;
+
 import java.util.concurrent.TimeUnit;
 
 public class AsyncTaskTest extends AndroidTestCase {

@@ -1,12 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-
     defaultConfig {
-        applicationId "com.example.android.builditbigger"
-        minSdkVersion 9
+        applicationId 'com.example.android.builditbigger'
+        minSdkVersion 20
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -17,14 +20,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        free {
+            minSdkVersion 20
+            applicationId 'com.example.android.builditbigger.free'
+            versionCode 2
+            versionName '0.2'
+        }
+        paid {
+            minSdkVersion 20
+            applicationId 'com.example.android.builditbigger.paid'
+            versionCode 3
+            versionName '0.3'
+        }
+    }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile project(":androidjokes")
+    compile project(':androidjokes')
+    compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'com.android.support:support-v4:23.1.1'
-    compile project(path: ':backend', configuration: 'android-endpoints')
+    compile 'com.android.support:design:23.1.1'
 }
